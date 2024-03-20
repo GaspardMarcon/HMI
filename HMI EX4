@@ -1,0 +1,66 @@
+# HMI 4 Graded exercice
+# MARCON Gaspard
+
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QStatusBar, QToolBar
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtGui import QIcon, QKeySequence
+
+class FenetrePrincipale(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        
+        self.action = QAction(QIcon("android.png"), "bouton1", self)
+        self.action.setStatusTip("C'est le premier bouton")
+        self.action.triggered.connect(self.onMyToolBarButtonClick)
+        self.action.setShortcut(QKeySequence('A'))
+        
+        self.action2 = QAction(QIcon("animal-penguin.png"), "bouton2", self)
+        self.action2.setStatusTip("C'est le deuxième bouton")
+        self.action2.triggered.connect(self.onMyToolBarButtonClick2)
+        self.action2.setShortcut(QKeySequence('B'))
+        
+        
+        self.action3 = QAction(QIcon("alarm.png"), "bouton3", self)
+        self.action3.setStatusTip("C'est le troisième bouton")
+        self.action3.triggered.connect(self.onMyToolBarButtonClick3)
+        self.action3.setShortcut(QKeySequence('C'))
+        
+        
+        self.action4 = QAction(QIcon("animal-monkey.png"), "bouton4", self)
+        self.action4.setStatusTip("It's a monkey ! :D")
+        self.action4.triggered.connect(self.onMyToolBarButtonClick4)
+        self.action4.setShortcut(QKeySequence('M'))
+        
+        self.setStatusBar(QStatusBar())
+        
+        self.menuFichier = self.menuBar().addMenu("Fichier")
+        self.menuFichier.addAction(self.action)
+        self.menuFichier.addSeparator()
+        self.menuFichier.addAction(self.action2)
+        
+        
+        
+        self.menuMore = self.menuBar().addMenu("Save")
+        self.menuMore.addAction(self.action3)
+        self.sousMenu = self.menuMore.addMenu("More")
+        self.sousMenu.addAction(self.action4)
+        
+        
+    def onMyToolBarButtonClick(self):
+        print("I'm a button. Pwet !")
+    def onMyToolBarButtonClick2(self):
+        print("I'm also a button PwetPwet")
+    def onMyToolBarButtonClick3(self):
+        print("That's enough button isn't it?")
+    def onMyToolBarButtonClick4(self):
+        print("I'm a MONKEY, BANANAAAA")
+        
+app = QCoreApplication.instance()
+if app is None:
+    app = QApplication(sys.argv)
+    
+window = FenetrePrincipale()
+window.show()
+
+app.exec_()
